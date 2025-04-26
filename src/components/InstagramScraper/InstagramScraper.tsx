@@ -2,7 +2,7 @@
 "use client";
 import React, { useState } from 'react';
 import axios from 'axios';
-import { InstagramProfile } from '../types/instagramscrap';
+import { InstagramProfile } from '../types/instascrap';
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import Image from "next/image";
