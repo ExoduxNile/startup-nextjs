@@ -1,7 +1,7 @@
 // src/controllers/instagramController.ts
 import { Request, Response } from 'express';
-import { InstagramScraper } from '../services/instagramScraper';
-import { ScrapeResponse } from '../types/instascrap';
+import { InstagramScraper } from './services/instagramScraper';
+import { ScrapeResponse } from './types/instascrap';
 
 const scraper = new InstagramScraper();
 
