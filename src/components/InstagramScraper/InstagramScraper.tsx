@@ -5,7 +5,8 @@ import { InstagramProfile } from '@/types/instascrap';
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from 'react';
+
 
 const InstagramScraper: React.FC = () => {
     const [username, setUsername] = useState('');
