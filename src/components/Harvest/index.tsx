@@ -2,8 +2,16 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
+import { Metadata } from "next";
 
-const Contact = () => {
+export const metadata: Metadata = {
+  title: "Instagram Scraper",
+
+  // other metadata
+  description: "Extract followers bio and contact details."
+};
+
+const Harvest = () => {
   /**
    * Source: https://www.joshwcomeau.com/react/the-perils-of-rehydration/
    * Reason: To fix rehydration error
@@ -209,4 +217,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Harvest;
