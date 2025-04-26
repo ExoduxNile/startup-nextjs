@@ -1,6 +1,6 @@
 // lib/scraper.ts
 import puppeteer from 'puppeteer-core';
-import chrome from 'chrome-aws-lambda';
+import chromium from '@sparticuz/chromium-min';
 
 interface InstagramProfile {
   username: string;
@@ -18,14 +18,21 @@ export const scrapeInstagramProfile = async (username: string): Promise<Instagra
   try {
     console.log(`🚀 Scraping Instagram profile: ${username}`);
 
+    // Initialize Chromium
+    chromium.setGraphicsMode = false; // Disable GPU in Lambda
+
     browser = await puppeteer.launch({
-      args: [...chrome.args, '--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: await chrome.executablePath || process.env.CHROME_EXECUTABLE_PATH,
-      headless: chrome.headless,
+      args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(
+        'https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar'
+      ),
+      headless: chromium.headless,
+      ignoreHTTPSErrors: true,
     });
 
     const page = await browser.newPage();
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36');
     
     await page.goto(`https://www.instagram.com/${username}/`, {
       waitUntil: 'networkidle2',
