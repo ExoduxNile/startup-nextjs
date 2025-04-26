@@ -5,5 +5,4 @@ export type Testimonial = {
   designation: string;
   content: string;
   image: testi;
-  star: number;
 };
