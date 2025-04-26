@@ -4,7 +4,7 @@ import Brands from "@/components/Brands";
 import ScrollUp from "@/components/Common/ScrollUp";
 import Contact from "@/components/Contact";
 
-import Hero from "@/components/InstagramScraper";
+import InstagramScraper from "@/components/InstagramScraper";
 
 import Video from "@/components/Video";
 import { Metadata } from "next";
