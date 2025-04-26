@@ -1,7 +1,7 @@
 // src/server.ts
 import express from 'express';
 import cors from 'cors';
-import { scrapeProfile } from './controllers/instagramController';
+import { scrapeProfile } from '@/controllers/instagramController';
 
 const app = express();
 
