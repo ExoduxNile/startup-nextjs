@@ -1,6 +1,7 @@
 // src/services/instagramScraper.ts
 import puppeteer, { Browser } from 'puppeteer-core';
 import { InstagramProfile } from '@/types/instascrap';
+import cors from 'cors';
 
 export class InstagramScraper {
     private browser: Browser | null = null;
