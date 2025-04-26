@@ -4,18 +4,22 @@ import chrome from 'chrome-aws-lambda';
 
 interface InstagramProfile {
   username: string;
-  bio: string;
+  posts?: string;
   followers: string;
-  email: string;
-  phone: string;
+  bio?: string;
+  email?: string;
+  phone?: string;
+  error?: string;
 }
 
 export const scrapeInstagramProfile = async (username: string): Promise<InstagramProfile | null> => {
   let browser = null;
   
   try {
+    console.log(`🚀 Scraping Instagram profile: ${username}`);
+
     browser = await puppeteer.launch({
-      args: chrome.args,
+      args: [...chrome.args, '--no-sandbox', '--disable-setuid-sandbox'],
       executablePath: await chrome.executablePath || process.env.CHROME_EXECUTABLE_PATH,
       headless: chrome.headless,
     });
@@ -28,33 +32,57 @@ export const scrapeInstagramProfile = async (username: string): Promise<Instagra
       timeout: 15000
     });
 
-    return await page.evaluate((): InstagramProfile => {
-      const getMetaContent = (property: string): string | null => {
-        const element = document.querySelector(`meta[property="${property}"]`);
-        return element ? element.getAttribute('content') : null;
+    // Wait for profile data to load
+    await page.waitForSelector('header section', { timeout: 5000 });
+
+    const data = await page.evaluate((): InstagramProfile => {
+      const getText = (selector: string): string => {
+        const el = document.querySelector(selector);
+        return el ? el.textContent?.trim() || 'N/A' : 'N/A';
       };
 
-      const description = getMetaContent('og:description');
-      let followers = '0';
-      let bio = '';
+      const getStats = () => {
+        const stats = document.querySelectorAll('ul li span span');
+        return {
+          posts: stats[0]?.textContent?.trim() || 'N/A',
+          followers: stats[1]?.textContent?.trim() || 'N/A',
+        };
+      };
 
-      if (description) {
-        const followersMatch = description.match(/([\d,]+)\s+Followers/);
-        followers = followersMatch ? followersMatch[1].replace(/,/g, '') : '0';
-        bio = description.split(' - ')[1] || '';
-      }
+      const getBio = (): string => {
+        const bioEl = document.querySelector('header section div:last-child');
+        return bioEl?.textContent?.trim() || '';
+      };
 
+      const bio = getBio();
+      
       return {
-        username: window.location.pathname.split('/')[1],
+        username: getText('header section h2, header section h1'),
+        ...getStats(),
         bio,
-        followers,
         email: bio.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi)?.[0] || '',
         phone: bio.match(/(?:\+?\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}/gi)?.[0] || ''
       };
     });
+
+    console.log('✅ Data Scraped:', data);
+
+    if (data.username === 'N/A') {
+      return { 
+        username,
+        followers: '0',
+        error: 'Could not fetch data, profile may be private or unavailable' 
+      };
+    }
+
+    return data;
   } catch (error) {
-    console.error('Scraping failed:', error);
-    return null;
+    console.error('🚨 Puppeteer Error:', error instanceof Error ? error.message : String(error));
+    return { 
+      username,
+      followers: '0',
+      error: 'Failed to scrape data' 
+    };
   } finally {
     if (browser) {
       await browser.close();
