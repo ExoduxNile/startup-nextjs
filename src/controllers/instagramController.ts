@@ -26,7 +26,7 @@ export const scrapeProfile = async (req: Request, res: Response) => {
     } catch (error) {
         const response: ScrapeResponse = {
             success: false,
-            error: error instanceof Error ? error.message : 'Failed to scrape profile'
+            error: error instanceof Error ? error.message : 'Failed to scrape profiless'
         };
         res.status(500).json(response);
     }

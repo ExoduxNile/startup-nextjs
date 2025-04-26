@@ -50,7 +50,7 @@ const InstagramScraper: React.FC = () => {
             } else {
                 const errorMessage = response.data?.error || 
                                    response.statusText || 
-                                   'Failed to scrape profile';
+                                   'Failed to scrape profiles';
                 setError(errorMessage);
                 
                 if (response.status === 429) {
