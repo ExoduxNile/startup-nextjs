@@ -1,6 +1,6 @@
 // src/services/instagramScraper.ts
 import puppeteer, { Browser } from 'puppeteer';
-import { InstagramProfile } from '../types/instagramScraper';
+import { InstagramProfile } from '../types/instagscrap';
 
 export class InstagramScraper {
     private browser: Browser | null = null;
