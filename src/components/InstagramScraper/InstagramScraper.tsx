@@ -1,7 +1,7 @@
 // src/components/InstagramScraper.tsx
 import React, { useState } from 'react';
 import axios from 'axios';
-import { InstagramProfile } from '../types';
+import { InstagramProfile } from '../types/instagramscraper';
 
 const InstagramScraper: React.FC = () => {
     const [username, setUsername] = useState('');
