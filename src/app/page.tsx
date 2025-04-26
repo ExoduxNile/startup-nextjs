@@ -18,14 +18,14 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <ScrollUp />
+      {/* <ScrollUp /> */}
       <Hero />
-      <Video />
+      {/* <Video />
       <Brands />
       <AboutSectionOne />
       <AboutSectionTwo />
 
-      <Contact />
+      <Contact /> */}
     </>
   );
 }
