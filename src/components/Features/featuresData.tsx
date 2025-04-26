@@ -1,4 +1,5 @@
 import { Feature } from "@/types/feature";
+import StaticImport from "next/image";
 
 const featuresData: Feature[] = [
   {
