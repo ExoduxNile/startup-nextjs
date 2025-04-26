@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       {/* <ScrollUp /> */}
-      <Hero />
+      <InstagramScraper />
       {/* <Video />
       <Brands />
       <AboutSectionOne />
