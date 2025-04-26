@@ -1,6 +1,5 @@
 // src/components/InstagramScraper.tsx
 "use client";
-import React, { useState } from 'react';
 import axios from 'axios';
 import { InstagramProfile } from '../types/instascrap';
 import { useTheme } from "next-themes";
