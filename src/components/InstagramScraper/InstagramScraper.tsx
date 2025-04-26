@@ -1,7 +1,12 @@
 // src/components/InstagramScraper.tsx
+"use client";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { InstagramProfile } from '../types/instagramscraper';
+import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import React from "react";
 
 const InstagramScraper: React.FC = () => {
     const [username, setUsername] = useState('');
