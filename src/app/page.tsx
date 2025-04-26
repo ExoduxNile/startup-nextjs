@@ -3,9 +3,7 @@ import AboutSectionTwo from "@/components/About/AboutSectionTwo";
 import Brands from "@/components/Brands";
 import ScrollUp from "@/components/Common/ScrollUp";
 import Contact from "@/components/Contact";
-
 import InstagramScraper from "@/components/InstagramScraper";
-
 import Video from "@/components/Video";
 import { Metadata } from "next";
 
