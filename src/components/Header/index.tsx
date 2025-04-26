@@ -29,7 +29,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-99999 w-full py-7 ${
+      className={`left-0 top-0 z-99999 w-full py-7 ${
         stickyMenu
           ? "bg-white py-4! shadow-sm transition duration-100 dark:bg-black"
           : ""
@@ -102,7 +102,7 @@ const Header = () => {
             "navbar visible! mt-4 h-auto max-h-[400px] rounded-md bg-white p-7.5 shadow-solid-5 dark:bg-blacksection xl:h-auto xl:p-0 xl:shadow-none xl:dark:bg-transparent"
           }`}
         >
-          <nav>
+          {/* <nav>
             <ul className="flex flex-col gap-5 xl:flex-row xl:items-center xl:gap-10">
               {menuData.map((menuItem, key) => (
                 <li key={key} className={menuItem.submenu && "group relative"}>
@@ -149,9 +149,9 @@ const Header = () => {
                 </li>
               ))}
             </ul>
-          </nav>
+          </nav> */}
 
-          <div className="mt-7 flex items-center gap-6 xl:mt-0">
+          {/* <div className="mt-7 flex items-center gap-6 xl:mt-0">
             <ThemeToggler />
 
             <Link
@@ -167,7 +167,7 @@ const Header = () => {
             >
               Get Pro 🔥
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>
