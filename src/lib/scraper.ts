@@ -1,4 +1,5 @@
 // lib/scraper.ts
+import chromium from 'chrome-aws-lambda';
 import puppeteer from 'puppeteer-core';
 
 export async function scrapeInstagramProfile(username: string) {
@@ -7,8 +8,10 @@ export async function scrapeInstagramProfile(username: string) {
   }
 
   const browser = await puppeteer.launch({
-    headless: "new",
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,
   });
 
   try {
